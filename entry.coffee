@@ -7,6 +7,8 @@ window.$ = require 'jquery'
 $layout_content = $ require "html-loader!./templates/layout.slim"
 $root_content = $ require "html-loader!./templates/root.slim"
 
+require './style.sass'
+
 $ ->
 
   $layout_wrapper = $ "#layout-wrapper"
