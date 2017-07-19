@@ -1,3 +1,5 @@
+require './babylon_init.js'
+
 $ = require 'jquery'
 
 $layout_content = $ require "html-loader!./templates/layout.slim"

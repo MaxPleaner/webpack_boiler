@@ -1,8 +1,8 @@
 {
-  "name": "change_me",
-  "version": "0.0.0",
-  "description": "change_me",
-  "main": "entry.coffee",
+  "name": "ruby_node_interface",
+  "version": "1.0.0",
+  "description": "ruby_node_interface",
+  "main": "index.js",
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --content-base . --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/change_me/change_me.git"
+    "url": "git+ssh://git@github.com/maxpleaner/ruby_node_interface.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/change_me/change_me/issues"
+    "url": "https://github.com/maxpleaner/ruby_node_interface/issues"
   },
-  "homepage": "https://github.com/change_me/change_me#readme",
+  "homepage": "https://github.com/maxpleaner/ruby_node_interface#readme",
   "dependencies": {
     "coffee-loader": "^0.7.3",
     "coffee-script": "^1.12.5",
