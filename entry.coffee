@@ -1,6 +1,8 @@
-require './babylon_init.js'
+# BABYLON is expected to be defined as a global already
 
-$ = require 'jquery'
+Game = require('./game.coffee').load(BABYLON)
+
+window.$ = require 'jquery'
 
 $layout_content = $ require "html-loader!./templates/layout.slim"
 $root_content = $ require "html-loader!./templates/root.slim"
@@ -11,5 +13,6 @@ $ ->
   $layout_wrapper.append($layout_content)
 
   $root_wrapper = $ "#root-wrapper"
-  console.log $root_wrapper
   $root_wrapper.append($root_content)
+
+  window.game = Game.init()
