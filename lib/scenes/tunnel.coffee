@@ -25,14 +25,14 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
     this
 
   @build_camera = =>
-    @camera = @Camera.follow_camera @Vectors.new(0, 16, -45), @scene
+    @camera = @Camera.follow_camera @Vectors.new(0, 7, 12), @scene
     @Camera.set_target @camera, @Vectors.new(0,0,0)
     @Camera.configure_follow_camera @camera,
-      radius: 5,
-      height_offset: 5,
-      rotation_offset: 5,
-      camera_acceleration: 5,
-      max_camera_speed: 5
+      # radius: 5,
+      # height_offset: 5,
+      # rotation_offset: 5,
+      # camera_acceleration: 5,
+      # max_camera_speed: 5
     this
 
   @build_light = =>
