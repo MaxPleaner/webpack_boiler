@@ -1,32 +1,28 @@
+
+# =============================================================================
+# A minimal wrapper for a game object.
+# Creates canvas & engine references.
+# The scene gets constructed externally and passed to @start as an argument
+# Includes helper methods which can be used by scenes
+# =============================================================================
+
 Game = module.exports = load: (BABYLON) -> (->
 
-  Object.assign this,
-    require('./lib/helpers.coffee').load(BABYLON)
+  @Helpers = require('./lib/helpers.coffee').load(BABYLON)
+  { DOM, Engine } = @Helpers
 
-  @init = (tick_callback) =>
-    
-    # game components
-    @canvas = @DOM.get_canvas "#game-wrapper"
-    @engine = @Engine.create @canvas
-    @scene = @Scene.create @engine
-    @camera = @Camera.free_camera @Vectors.new(0, 5, -10), @scene
-    @light = @Light.create "Hemispheric", @Vectors.top_down(), @scene
-
-    # Shapes
-    @sphere = @Shapes.Sphere.create 16, 2, @scene
-    @Shapes.set_position @sphere, 'y', 1
-    @ground = @Shapes.Ground.create 6, 6, 2, @scene
-
-    # initial setup
-    @Light.set_intensity @light, 0.5
-    @Camera.attach_control @camera, @canvas
-    @Camera.set_target @camera, @Vectors.zero()
-    @Scene.set_background_color @scene, @Colors.green
-    @Engine.auto_resize @engine
-    @Engine.start_render_loop @engine, @scene
-
+  @init = =>
+    @canvas = DOM.get_canvas "#game-wrapper"
+    @engine = Engine.create @canvas
     this
 
+  @started = false
+
+  @start = (scene, tick_callback) =>
+    throw("loop already started") if started
+    started = !started
+    Engine.start_render_loop @engine, scene, tick_callback
+    
   this
 
 ).apply {}
