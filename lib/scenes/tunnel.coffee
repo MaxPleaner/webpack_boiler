@@ -1,12 +1,3 @@
-
-# -----------------------------------------------------------------------------
-# Plot:
-#   From the tourist center, the agent gets invited to scuba through a tunnel
-#   It winds a few times, illuminated by some reddish bulbs on the ceiling.
-#   The water is dark and foreboding.
-#   At the end of the tunnel there is an open bay
-# -----------------------------------------------------------------------------
-
 module.exports = Tunnel = load: (BABYLON, game) -> (->
 
   # Imports some functionality from game, including everything in helpers/
@@ -21,6 +12,7 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
     @build_light()
     @add_ground()
     @add_water()
+    @add_player()
     this
 
   @configure_engine = =>
@@ -67,6 +59,10 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
     @Materials.apply_material @water, @water_material
     @Materials.add_to_render_list @water_material, @ground
     this
+
+  @add_player = =>
+    @player = @Shapes.Sphere.create(2,12,@scene)
+
     
   this
 ).apply {}
