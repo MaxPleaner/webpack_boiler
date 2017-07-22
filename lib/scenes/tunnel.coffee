@@ -15,26 +15,32 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
 
   # returns a scene which can passed to game.start
   @build = =>
-    @add_game_components()
+    @scene = @Scene.create @engine
+    @build_camera()
+    @build_light()
     @add_shapes()
     @configure()
     this
 
-  @add_game_components = =>
-    @scene = @Scene.create @engine
+  @build_camera = =>
     @camera = @Camera.free_camera @Vectors.new(0, 5, -10), @scene
+    this
+
+  @build_light = =>
     @light = @Light.create "Hemispheric", @Vectors.top_down(), @scene
     this
 
   @add_shapes = =>
     @sphere = @Shapes.Sphere.create 16, 2, @scene
-    @Shapes.set_position @sphere, 'y', 1
     @ground = @Shapes.Ground.create 6, 6, 2, @scene
     this
 
   @configure = =>
+    @Camera.deactivate_panning @scene
+    @Shapes.set_position @sphere, 'y', 1
     @Light.set_intensity @light, 0.5
     @Camera.attach_control @camera, @canvas
+    @Camera.detach_control @camera, @canvas
     @Camera.set_target @camera, @Vectors.zero()
     @Scene.set_background_color @scene, @Colors.green
     @Engine.auto_resize @engine    

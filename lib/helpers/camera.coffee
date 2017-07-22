@@ -53,9 +53,12 @@ module.exports = Camera = load: (BABYLON) -> (->
   @set_target = (camera, vector) ->
     camera.setTarget vector
 
-  # add a camera to the canvas
+  # add mouse control to camera
   @attach_control = (camera, canvas, prevent_default=true) ->
     camera.attachControl canvas, !prevent_default
+
+  @detach_control = (camera, canvas) ->
+    camera.detachControl canvas
 
   # set the camera position
   @set_position = (camera, vector) ->
