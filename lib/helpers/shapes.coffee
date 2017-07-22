@@ -1,6 +1,9 @@
 Shapes = module.exports = load: (BABYLON) -> (->
 
-  @set_position: (shape, direction, val) ->
+  @create_shape = (type, args...) ->
+    BABYLON.Mesh["Create#{type}"](args...)
+
+  @set_position = (shape, direction, val) ->
     shape.position[direction] = val
 
   # TODO (see https://doc.babylonjs.com/tutorials/discover_basic_elements):
@@ -12,53 +15,54 @@ Shapes = module.exports = load: (BABYLON) -> (->
   # - Tube
   # - TiledGround
 
-  # Note the following valid values for 'side_orientation':
+  # the 'opts' params are two sequential values: 'updatable' (bool) and
+  # 'side_orientiation' (one of the following values:)
   # - BABYLON.Mesh.FRONTSIDE,
   # - BABYLON.Mesh.BACKSIDE,
   # - BABYLON.Mesh.DOUBLESIDE,
   # - BABYLON.Mesh.DEFAULT which is the default value and equals FRONTSIDE currently.
 
   @Knot =
-    create: (name, radius, tube, radial_segments, tubular_segments, p, q scene, updatable, side_orientation) ->
-      BABYLON.Mesh.CreateKnot name, radius, tube, radial_segments, tubular_segments, p, q scene, updatable, side_orientation
+    create: (radius, tube, radial_segments, tubular_segments, p, q, scene, opts...) =>
+      @create_shape 'Knot', null, radius, tube, radial_segments, tubular_segments, p, q scene, opts...
   
   @Torus =
-    create: (name, diameter, thickness, tessellation, scene, updatable, side_orientation) ->
-      BABYLON.Mesh.CreateTorus name, diameter, thickness, tessellation, scene, updatable, side_orientation
+    create: (diameter, thickness, tessellation, scene, opts...) =>
+      @create_shape 'Torus', null, diameter, thickness, tessellation, scene, opts...
 
   @Cylinder =
-    create: (name, height, diam_top, diam_bottom, tessellation, height_subdivs, scene, updatable, side_orientation) ->
-      BABYLON.Mesh.CreateCylinder name, height, diam_top, diam_bottom, tessellation, height_subdivs, scene, updatable, side_orientation
+    create: (height, diam_top, diam_bottom, tessellation, height_subdivs, scene, opts...) =>
+      @create_shape 'Cylinder', null, height, diam_top, diam_bottom, tessellation, height_subdivs, scene, opts...
 
   @Triangle =
-    create: (name, radius, scene, updatable, side_orientation) ->
-      BABYLON.Mesh.CreateDisk name, radius, 3, scene, updatable, side_orientation
+    create: (radius, scene, opts...) =>
+      @create_shape 'Disk', null, radius, 3, scene, opts...
 
   @Square =
-    create: (name, radius, scene, updatable, side_orientation) ->
-      BABYLON.Mesh.CreateDisk name, radius, 4, scene, updatable, side_orientation
+    create: (radius, scene, opts...) =>
+      @create_shape 'Disk', null, radius, 4, scene, opts...
 
   @Disc =
-    create: (name, radius, tessellation, scene, updatable, side_orientation) ->
-      BABYLON.Mesh.CreateDisk name, radius, tessellation, scene, updatable, side_orientation
+    create: (radius, tessellation, scene, opts...) =>
+      @create_shape 'Disk', null, radius, tessellation, scene, opts...
 
   @Plane =
-    create: (name, size, scene, updatable, side_orientation) ->
-      BABYLON.Mesh.CreatePlane name, size, scene, updatable, side_orientation
+    create: (size, scene, opts...) =>
+      @create_shape 'Plane', null, size, scene, opts...
 
   @Box =
-    create: (name, size, scene, updatable, side_orientation) ->
-      BABYLON.Mesh.CreateBox name, size, scene, updatable, side_orientation
+    create: (size, scene, opts...) =>
+      @create_shape 'Box', null, size, scene, opts...
 
   @Sphere =
-    create: (name, subdivisions, size, scene, updatable, side_orientation) ->
-      BABYLON.Mesh.CreateSphere name, subdivisions, size, scene, updatable, side_orientation
+    create: (subdivisions, size, scene, opts...) =>
+      @create_shape 'Sphere', null, subdivisions, size, scene, opts...
 
   @Ground =
-    create: (name, width, depth, subdivisions, scene, updatable, side_orientation) ->
-      BABYLON.Mesh.CreateGround name, width, depth, subdivisions, scene, updatable, side_orientation
-    from_height_map: (name, heightmapPath, width, depth, subdivs, minheight, maxheight, scene, updatable, successCallback) ->
-      BABYLON.Mesh.CreateGroundFromHeightMap name, heightmapPath, width, depth, subdivs, minheight, maxheight, scene, updatable, successCallback
+    create: (width, depth, subdivisions, scene, opts...) =>
+      @create_shape 'Ground', null, width, depth, subdivisions, scene, opts...
+    from_height_map: (heightmapPath, width, depth, subdivs, minheight, maxheight, scene, updatable, successCallback) =>
+      @create_shape 'GroundFromHeightMap', null, heightmapPath, width, depth, subdivs, minheight, maxheight, scene, updatable, successCallback
 
   this
 ).apply {}
