@@ -27,7 +27,7 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
     this
 
   @build_light = =>
-    @light = @Light.create "Hemispheric", @Vectors.top_down(), @scene
+    @light = @Light.spot_light @Vectors.new(0,5,0), @Vectors.top_down(), 0.8, 2, @scene
     this
 
   @add_shapes = =>
@@ -36,14 +36,12 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
     this
 
   @configure = =>
+    @light.intensity = 0.5
     @Camera.deactivate_panning @scene
     @Shapes.set_position @sphere, 'y', 1
-    @Light.set_intensity @light, 0.5
-    @Camera.attach_control @camera, @canvas
-    @Camera.detach_control @camera, @canvas
-    @Camera.set_target @camera, @Vectors.zero()
-    @Scene.set_background_color @scene, @Colors.green
-    @Engine.auto_resize @engine    
+    @Materials.color_shape @sphere, @Colors.red, 1, @scene
+    @Camera.set_target @camera, @Vectors.new(0,0,0)
+    @Engine.auto_resize @engine
     this
     
   this

@@ -13,7 +13,7 @@ module.exports = Particles = load: (BABYLON) -> (->
     particle_system.emitter = obj
 
   @set_particle_texture = (particle_system, path, scene) ->
-    particle_system.particleTexture = new BABYLON.Texture(path, scene)
+    particle_system.particleTexture = new BABYLON.Texture(null, path, scene)
 
   @set_texture_mask = (particle_system, r, g, b, a) ->
     particle_system.textureMask = new BABYLON.Color4(r,g,b,a)

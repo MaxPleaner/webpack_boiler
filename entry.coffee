@@ -30,8 +30,9 @@ $ ->
   Game = require('./game.coffee').load(BABYLON)
   game = Game.init()
   Scenes = require("./lib/scenes.coffee").load(BABYLON, game)
-  { scene } = Scenes.Tunnel.build()
-  game.start(scene, ->)
+  tunnel_scene = Scenes.Tunnel.build()
+  game.start(tunnel_scene.scene, ->)
+  window.x = tunnel_scene
 
 # -----------------------------------------------------------------------------
 # Loads styles and attaches them to DOM
