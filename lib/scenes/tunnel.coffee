@@ -25,9 +25,14 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
     this
 
   @build_camera = =>
-    @camera = @Camera.free_camera @Vectors.new(0, 10, -20), @scene
-    @Camera.deactivate_panning @scene
+    @camera = @Camera.follow_camera @Vectors.new(0, 16, -45), @scene
     @Camera.set_target @camera, @Vectors.new(0,0,0)
+    @Camera.configure_follow_camera @camera,
+      radius: 5,
+      height_offset: 5,
+      rotation_offset: 5,
+      camera_acceleration: 5,
+      max_camera_speed: 5
     this
 
   @build_light = =>
@@ -61,7 +66,10 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
     this
 
   @add_player = =>
-    @player = @Shapes.Sphere.create(2,12,@scene)
+    @player = @Shapes.Sphere.create(2,1.5,@scene)
+    @Shapes.set_position @player, 'y', 2.5
+    @Camera.configure_follow_camera @camera,
+      target: @player
 
     
   this

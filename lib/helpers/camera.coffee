@@ -53,6 +53,20 @@ module.exports = Camera = load: (BABYLON) -> (->
   @set_target = (camera, vector) ->
     camera.setTarget vector
 
+  @configure_follow_camera = (
+    follow_camera, {
+      target, radius, height_offset, rotation_offset,
+      camera_acceleration, max_camera_speed
+    }
+  ) ->
+    follow_camera.lockedTarget       = target              if target
+    follow_camera.radius             = radius              if radius
+    follow_camera.heightOffset       = height_offset       if height_offset
+    follow_camera.rotationOffset     = rotation_offset     if rotation_offset
+    follow_camera.cameraAcceleration = camera_acceleration if camera_acceleration
+    follow_camera.maxCameraSpeed     = max_camera_speed    if max_camera_speed
+
+
   # add mouse control to camera
   @attach_control = (camera, canvas, prevent_default=true) ->
     camera.attachControl canvas, !prevent_default
