@@ -59,8 +59,8 @@ Shapes = module.exports = load: (BABYLON) -> (->
       @create_shape 'Sphere', null, subdivisions, size, scene, opts...
 
   @Ground =
-    create: (width, depth, subdivisions, scene, opts...) =>
-      @create_shape 'Ground', null, width, depth, subdivisions, scene, opts...
+    create: (width, depth, subdivisions, scene, can_be_regenerated, mesh) =>
+      @create_shape 'Ground', null, width, depth, subdivisions, scene, can_be_regenerated, mesh
     from_height_map: (heightmapPath, width, depth, subdivs, minheight, maxheight, scene, updatable, successCallback) =>
       @create_shape 'GroundFromHeightMap', null, heightmapPath, width, depth, subdivs, minheight, maxheight, scene, updatable, successCallback
 

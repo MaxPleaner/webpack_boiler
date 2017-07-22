@@ -23,23 +23,25 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
     this
 
   @build_camera = =>
-    @camera = @Camera.free_camera @Vectors.new(0, 5, -10), @scene
+    @camera = @Camera.free_camera @Vectors.new(0, 10, -20), @scene
     this
 
   @build_light = =>
-    @light = @Light.spot_light @Vectors.new(0,5,0), @Vectors.top_down(), 0.8, 2, @scene
+    @light = @Light.spot_light @Vectors.new(0,100,0), @Vectors.top_down(), 0.8, 2, @scene
     this
 
   @add_shapes = =>
     @sphere = @Shapes.Sphere.create 16, 2, @scene
-    @ground = @Shapes.Ground.create 6, 6, 2, @scene
+    @ground = @Shapes.Ground.create 100, 100, 3, @scene
     this
 
   @configure = =>
+    @Scene.set_background_color @scene, @Colors.black
     @light.intensity = 0.5
     @Camera.deactivate_panning @scene
     @Shapes.set_position @sphere, 'y', 1
     @Materials.color_shape @sphere, @Colors.red, 1, @scene
+    @Materials.color_shape @ground, @Colors.red, 1, @scene
     @Camera.set_target @camera, @Vectors.new(0,0,0)
     @Engine.auto_resize @engine
     this
