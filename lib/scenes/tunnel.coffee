@@ -21,18 +21,16 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
 
   @build_scene = =>
     @scene = @Scene.create @engine
+    @Physics.enable(@scene, @Vectors.earth_gravity())
     @Scene.set_background_color @scene, @Colors.black()
     this
 
   @build_camera = =>
-    @camera = @Camera.follow_camera @Vectors.new(0, 7, 12), @scene
+    @camera = @Camera.follow_camera @Vectors.new(0, 6, 6), @scene
     @Camera.set_target @camera, @Vectors.new(0,0,0)
     @Camera.configure_follow_camera @camera,
-      # radius: 5,
-      # height_offset: 5,
-      # rotation_offset: 5,
-      # camera_acceleration: 5,
-      # max_camera_speed: 5
+      radius: 6,
+      height_offset: 10,
     this
 
   @build_light = =>
@@ -41,16 +39,18 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
     this
 
   @add_ground = =>
-    @ground = @Shapes.Ground.create 100, 100, 3, @scene
+    @ground = @Shapes.Ground.create 100, 100, 0, @scene
     @ground_material = @Materials.create_material @scene
     @ground_material.diffuseTexture = @Materials.create_texture "./textures/ground.jpg", @scene
     @ground_material.diffuseTexture.uScale = 4
     @ground_material.diffuseTexture.vScale = 4
     @Materials.apply_material @ground, @ground_material
+    @Physics.set_impostor @ground,
+      "Box", { mass: 0, restitution: 0.9 }, @scene
     this
 
   @add_water = =>
-    @water = @Shapes.Ground.create 100, 100, 3, @scene, false
+    @water = @Shapes.Ground.create 100, 100, 1, @scene, false
     @water_material = @Materials.create_water_material @scene
     @Materials.set_bump_texture "./textures/waterbump.png", @water_material, @scene
     @Materials.set_water_properties @water_material,
@@ -68,6 +68,24 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
   @add_player = =>
     @player = @Shapes.Sphere.create(2,1.5,@scene)
     @Shapes.set_position @player, 'y', 2.5
+    @Physics.set_impostor @player,
+      "Sphere", { mass: 1, restitution: 0.9 }, @scene
+    movement_speed = 0.25
+    rotation_speed = 20
+    $(window).on "keydown", (e) =>
+      code = e.keyCode
+      if code == 37
+        # @Shapes.set_position @player, 'x', (@player.position.x + movement_speed)
+        @camera.rotationOffset -= rotation_speed
+      else if code == 38
+        null
+        # @Shapes.set_position @player, 'z', (@player.position.z - movement_speed)
+      else if code == 39
+        # @Shapes.set_position @player, 'x', (@player.position.x - movement_speed)
+        @camera.rotationOffset += rotation_speed
+      else if code == 40
+        null
+        # @Shapes.set_position @player, 'z', (@player.position.z + movement_speed)
     @Camera.configure_follow_camera @camera,
       target: @player
 

@@ -15,5 +15,7 @@ module.exports = Vectors = load: (BABYLON) -> (->
     @new 0, 0, 1
   @zero = ->
     BABYLON.Vector3.Zero()
+  @earth_gravity = ->
+    @new 0, -9.81, 0
   this
 ).apply {}

@@ -14,6 +14,7 @@ Helpers = module.exports = load: (BABYLON) -> (->
   @Animation    = require("./helpers/animation.coffee"  ).load(BABYLON)
   @Particles    = require("./helpers/particles.coffee"  ).load(BABYLON)
   @Sprites      = require("./helpers/sprites.coffee"    ).load(BABYLON)
+  @Physics      = require("./helpers/physics.coffee"    ).load(BABYLON)
   @Collisions   = require("./helpers/collisions.coffee" ).load(BABYLON)
   @Materials    = require("./helpers/materials.coffee"  ).load(BABYLON)
   @Events       = require("./helpers/events.coffee"     ).load(BABYLON)
