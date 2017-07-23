@@ -26,11 +26,12 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
     this
 
   @build_camera = =>
-    @camera = @Camera.follow_camera @Vectors.new(0, 6, 6), @scene
-    @Camera.set_target @camera, @Vectors.new(0,0,0)
-    @Camera.configure_follow_camera @camera,
-      radius: 6,
-      height_offset: 10,
+    @camera = @Camera.free_camera @Vectors.new(0, 5, -20), @scene
+    # @Camera.attach_control @camera, @canvas  
+    # @Camera.set_target @camera, @Vectors.new(0,0,0)
+    # @Camera.configure_follow_camera @camera,
+    #   radius: 6,
+    #   height_offset: 10
     this
 
   @build_light = =>
@@ -39,7 +40,7 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
     this
 
   @add_ground = =>
-    @ground = @Shapes.Ground.create 100, 100, 0, @scene
+    @ground = @Shapes.Ground.create 50, 50, 0, @scene
     @ground_material = @Materials.create_material @scene
     @ground_material.diffuseTexture = @Materials.create_texture "./textures/ground.jpg", @scene
     @ground_material.diffuseTexture.uScale = 4
@@ -50,7 +51,7 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
     this
 
   @add_water = =>
-    @water = @Shapes.Ground.create 100, 100, 1, @scene, false
+    @water = @Shapes.Ground.create 50, 30, 0, @scene, false
     @water_material = @Materials.create_water_material @scene
     @Materials.set_bump_texture "./textures/waterbump.png", @water_material, @scene
     @Materials.set_water_properties @water_material,
@@ -61,33 +62,59 @@ module.exports = Tunnel = load: (BABYLON, game) -> (->
       color_blend_factor: 0.3
       bump_height: 0.1
       wave_length: 0.1
+    @Physics.set_impostor @water,
+      "Box", { mass: 0, restitution: 0 }, @scene
     @Materials.apply_material @water, @water_material
     @Materials.add_to_render_list @water_material, @ground
     this
 
   @add_player = =>
     @player = @Shapes.Sphere.create(2,1.5,@scene)
-    @Shapes.set_position @player, 'y', 2.5
-    @Physics.set_impostor @player,
+    @Shapes.set_position @player, 'y', 20
+    @player_imposter = @Physics.set_impostor @player,
       "Sphere", { mass: 1, restitution: 0.9 }, @scene
-    movement_speed = 0.25
-    rotation_speed = 20
+    movement_speed = 0.1
+    # rotation_speed = 15
+    # @Camera.configure_follow_camera @camera, { target: @player }
     $(window).on "keydown", (e) =>
       code = e.keyCode
-      if code == 37
-        # @Shapes.set_position @player, 'x', (@player.position.x + movement_speed)
-        @camera.rotationOffset -= rotation_speed
-      else if code == 38
+      console.log code
+      if code == 87 # 'w'
         null
-        # @Shapes.set_position @player, 'z', (@player.position.z - movement_speed)
-      else if code == 39
-        # @Shapes.set_position @player, 'x', (@player.position.x - movement_speed)
-        @camera.rotationOffset += rotation_speed
-      else if code == 40
+      else if code == 65 # 'a'
         null
-        # @Shapes.set_position @player, 'z', (@player.position.z + movement_speed)
-    @Camera.configure_follow_camera @camera,
-      target: @player
+      else if code == 68 # 'd'
+        null
+      else if code == 83 # 's'
+        null
+      else if code == 37  # left arrow
+        @Physics.apply_impulse(
+          @player_imposter,
+          @Vectors.new(-movement_speed, 0, 0),
+          @player.getAbsolutePosition()
+        )
+        # @Physics.Linear.move_left(@player_imposter, movement_speed)
+      else if code == 38 # up arrow
+        @Physics.apply_impulse(
+          @player_imposter,
+          @Vectors.new(0, 0, movement_speed),
+          @player.getAbsolutePosition()
+        )
+        # @Physics.Linear.move_up(@player_imposter, movement_speed)
+      else if code == 39 # right arrow
+        @Physics.apply_impulse(
+          @player_imposter,
+          @Vectors.new(movement_speed, 0, 0),
+          @player.getAbsolutePosition()
+        )
+        # @Physics.Linear.move_right(@player_imposter, movement_speed)
+      else if code == 40 # down arrow
+        @Physics.apply_impulse(
+          @player_imposter,
+          @Vectors.new(0, 0, -movement_speed),
+          @player.getAbsolutePosition()
+        )
+        # @Physics.Linear.move_down(@player_imposter, movement_speed)
 
     
   this
