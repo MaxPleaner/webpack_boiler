@@ -17,6 +17,8 @@ It includes the following compilation setup:
 4. gifs can be manipulated and transformed to webm using the
    [animation-loader](http://github.com/maxpleaner/animation-loader) I authored.
    See that readme for more info.
+   **note** if using this some system dependencies are also needed.
+   Run `./install_system_deps.sh` in this case, to install ffmpeg and imagemagick
 
 ---
 
