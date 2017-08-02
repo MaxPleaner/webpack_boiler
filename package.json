@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/change_me/change_me#readme",
   "dependencies": {
+    "animation-loader": "0.0.5",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "coffee-loader": "github:webpack-contrib/coffee-loader#0ea4d6a7cc9ffc7c8f7a0c6eb3fd3fedea9943b8",
     "coffeescript": "^2.0.0-beta1",
