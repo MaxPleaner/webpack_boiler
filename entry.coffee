@@ -1,13 +1,16 @@
-$ = require 'jquery'
 
-$layout_content = $ require "html-loader!./templates/layout.slim"
-$root_content = $ require "html-loader!./templates/root.slim"
+window.$ = require 'jquery'
+
+React = require 'react'
+ReactDOM = require 'react-dom'
+
+class Root extends React.Component
+  render: -> (
+    <b>hello world </b>
+  )
+
+window.InitReact = ->
+  ReactDOM.render <Root/>, document.getElementById("root-wrapper")
 
 $ ->
-
-  $layout_wrapper = $ "#layout-wrapper"
-  $layout_wrapper.append($layout_content)
-
-  $root_wrapper = $ "#root-wrapper"
-  console.log $root_wrapper
-  $root_wrapper.append($root_content)
+  InitReact()
