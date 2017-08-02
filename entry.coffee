@@ -3,14 +3,16 @@ window.$ = require 'jquery'
 
 React = require 'react'
 ReactDOM = require 'react-dom'
+ReactNative = require 'react-native-web'
+{ AppRegistry, Image, StyleSheet, Text, View } = ReactNative
 
-class Root extends React.Component
-  render: -> (
-    <b>hello world </b>
-  )
+Root = ->
+  <Text>hello world </Text>
 
 window.InitReact = ->
-  ReactDOM.render <Root/>, document.getElementById("root-wrapper")
+  AppRegistry.registerComponent 'MyApp', () -> Root
+  AppRegistry.runApplication 'MyApp',
+    rootTag: document.getElementById('root-wrapper')
 
 $ ->
   InitReact()
