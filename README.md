@@ -1,4 +1,8 @@
+---
+
 This provides a starting point for a webpack application.
+
+---
 
 It includes the following compilation setup:
 
@@ -16,12 +20,23 @@ It includes the following compilation setup:
 
 ---
 
+Getting started:
+
+- the entry point is entry.coffee. This can be changed by editing `webpack.config.js`
+- If changing the webpack.config.js file, the webpack.production.config.js should
+  also get the same changes so that the deployment build works correctly. 
+  The files are identical to one another in this boiler. 
+
+---
+
 To use:
 
 1. clone
 2. npm install
 3. npm run dev
 4. localhost:8080
+
+---
 
 to get ready for production
 

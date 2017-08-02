@@ -1,18 +1,9 @@
-// Little trick so that that coffee-loader uses coffee 2
-
-// var coffeescript = require('coffee-script')
-// console.log(coffeescript.VERSION)
-// require.cache[require.resolve('coffee-script')] = require.cache[require.resolve('coffeescript')]
-
 module.exports = {
 
   entry: "./entry.coffee",
 
   // the bundle is stored in memory, though it's referenced by this path
-
-  output: {
-    filename: "bundle.js"
-  },
+  output: { filename: "bundle.js" },
 
   module: {
 
@@ -24,7 +15,8 @@ module.exports = {
 
       // Coffee script files are loaded like regular JS files:
       // Foo = require("./foo.coffee")
-      // JSX & ES6 are handled, which coffeescript 2 outputs
+      // Coffeescript 2 can output JSX and ES6,
+      // so the output is then fed through Babel to produce ES5.
       {
         test: /\.coffee$/,
         exclude: /(node_modules|bower_components)/,
@@ -48,14 +40,14 @@ module.exports = {
       // Manipulate gifs (and transform them into webm)
       { test: /\.gif$/, loader: ['raw-loader', "animation-loader"] }
 
-
     ]
   },
 
   resolve: {
 
-    // Put an entry here for each of the extensions which has a loader
-    extensions: [".js", ".coffee", ".slim", ".sass", ".css", "jsx", ".gif"],
+    extensions: [
+      ".js", ".coffee", ".slim", ".sass", ".css", "jsx", ".gif"
+    ],
 
     // Something needed for Vue
     // alias: {
