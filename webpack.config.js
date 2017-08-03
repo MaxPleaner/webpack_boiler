@@ -48,6 +48,9 @@ module.exports = {
     extensions: [
       ".js", ".coffee", ".slim", ".sass", ".css", "jsx", ".gif"
     ],
+    alias: {
+      'react-native': 'react-native-web'
+    },    
 
     // Something needed for Vue
     // alias: {
