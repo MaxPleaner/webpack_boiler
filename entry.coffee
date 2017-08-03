@@ -3,7 +3,7 @@ window.$ = require 'jquery'
 
 React = require 'react'
 ReactDOM = require 'react-dom'
-ReactNative = require 'react-native-web'
+ReactNative = require 'react-native'
 { AppRegistry, Image, StyleSheet, Text, View } = ReactNative
 
 Root = ->
@@ -15,4 +15,4 @@ window.InitReact = ->
     rootTag: document.getElementById('root-wrapper')
 
 $ ->
-  InitReact()
+  InitReact() 
