@@ -6,7 +6,6 @@ ReactDOM = require 'react-dom'
 ReactNative = require 'react-native'
 { AppRegistry, Button, Text, View } = ReactNative
 
-
 CounterButton = ({text, on_press}) ->
   <Button title='counter' onPress={on_press}>{text}</Button>
 
