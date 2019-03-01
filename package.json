@@ -19,31 +19,11 @@
   },
   "homepage": "https://github.com/change_me/change_me#readme",
   "dependencies": {
-    "animation-loader": "0.0.5",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "coffee-loader": "github:webpack-contrib/coffee-loader#0ea4d6a7cc9ffc7c8f7a0c6eb3fd3fedea9943b8",
-    "coffeescript": "^2.0.0-beta1",
-    "cookies-js": "^1.2.3",
-    "css-loader": "^0.28.0",
-    "express": "^4.15.2",
-    "extract-text-webpack-plugin": "^2.1.0",
-    "jquery": "^3.2.1",
-    "node-sass": "^4.5.2",
-    "sass-loader": "^6.0.3",
-    "slim-lang-loader": "0.0.7",
-    "style-loader": "^0.16.1",
-    "vue": "^2.2.6",
-    "vue-router": "^2.4.0",
-    "vuex": "^2.3.1",
-    "webpack": "^2.4.1",
-    "webpack-dev-server": "^2.4.2"
+    "html-loader": "^0.5.5",
+    "jquery": "^3.2.1"
   },
   "devDependencies": {
-    "babel-core": "^6.4.5",
-    "babel-loader": "^6.2.1",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-es2015": "^6.3.13",
-    "babel-preset-react": "^6.3.13",
-    "webpack": "^2.7.0"
+    "webpack": "^2.7.0",
+    "webpack-dev-server": "^2.4.2"
   }
 }
